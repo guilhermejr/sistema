@@ -1,0 +1,35 @@
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/guilhermejr/repositorio-cofiguracao-sistema
+          search-paths: '{application}'
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000
+        username: admin
+        password: 8eJeakZoGeZwp351k2
+        instance:
+          metadata:
+            user:
+                name: actuator
+                password: gkhIh63sSja7VKBhAD
+
+sistema:
+  eureka:
+    login: eureka
+    senha: mMnsilmomkq0bFiktR
+  config:
+    login: config
+    senha: EAIRdFHSb6wzz1GWjX
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@localhost:8761/eureka'
+  instance:
+    hostname: localhost

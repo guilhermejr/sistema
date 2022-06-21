@@ -1,0 +1,6 @@
+
+spring:
+  security:
+    user:
+      name: admin
+      password: 8eJeakZoGeZwp351k2

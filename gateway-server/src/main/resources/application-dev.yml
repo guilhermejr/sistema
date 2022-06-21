@@ -1,0 +1,20 @@
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000
+        username: admin
+        password: 8eJeakZoGeZwp351k2
+
+sistema:
+  eureka:
+    login: eureka
+    senha: mMnsilmomkq0bFiktR
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@localhost:8761/eureka'
+  instance:
+    hostname: localhost

@@ -1,0 +1,15 @@
+spring:
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+      discovery:
+        serviceId: config-server
+      username: config
+      password: EAIRdFHSb6wzz1GWjX
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000
+        username: admin
+        password: 8eJeakZoGeZwp351k2
