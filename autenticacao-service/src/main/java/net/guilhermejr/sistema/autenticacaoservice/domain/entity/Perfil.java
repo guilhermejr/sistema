@@ -1,10 +1,7 @@
 package net.guilhermejr.sistema.autenticacaoservice.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -13,6 +10,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +23,7 @@ public class Perfil implements GrantedAuthority, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @EqualsAndHashCode.Include
     private UUID id;
 
     @Column(nullable = false, unique = true)

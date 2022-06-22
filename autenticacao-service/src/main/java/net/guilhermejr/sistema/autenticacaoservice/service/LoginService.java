@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Log4j2
 @Service
@@ -47,7 +48,7 @@ public class LoginService {
             // --- Atualiza último acesso ---
             UserDetailsImpl usuarioLogado = (UserDetailsImpl) authentication.getPrincipal();
             Usuario usuarioDB = usuarioRepository.findById(usuarioLogado.getId()).get();
-            usuarioDB.setUltimoAcesso(LocalDateTime.now());
+            usuarioDB.setUltimoAcesso(LocalDateTime.now(ZoneId.of("UTC")));
             usuarioRepository.save(usuarioDB);
 
             // --- Retorno ---

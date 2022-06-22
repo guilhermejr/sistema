@@ -26,11 +26,9 @@ import javax.validation.Valid;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    private final AuthenticationCurrentUserService authenticationCurrentUserService;
 
-    public UsuarioController(UsuarioService usuarioService, AuthenticationCurrentUserService authenticationCurrentUserService) {
+    public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
-        this.authenticationCurrentUserService = authenticationCurrentUserService;
     }
 
     // --- Inserir ------------------------------------------------------------
@@ -40,8 +38,6 @@ public class UsuarioController {
     })
     @PostMapping
     public ResponseEntity<UsuarioResponse> inserir(@Valid @RequestBody UsuarioRequest usuarioRequest) {
-
-        UserDetailsImpl usuario = authenticationCurrentUserService.getCurrentUser();
 
         log.info("Inserindo usuário: {}", usuarioRequest.getEmail());
         UsuarioResponse usuarioResponse = usuarioService.inserir(usuarioRequest);

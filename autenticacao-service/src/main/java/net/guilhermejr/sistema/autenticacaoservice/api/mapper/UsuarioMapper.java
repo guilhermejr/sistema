@@ -11,9 +11,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -21,22 +20,21 @@ public class UsuarioMapper extends ModelMapperConfig {
 
     public UsuarioMapper() {
 
-        Converter<Set<String>, Set<Perfil>> perfisConverter = ctx -> {
+        Converter<List<String>, List<Perfil>> perfisConverter = ctx -> ctx.getSource().stream()
+                .map(p -> Perfil.builder().descricao(p).build()).collect(Collectors.toList());
 
-            Set<Perfil> perfis = new HashSet<>();
-            ctx.getSource().forEach(a -> {
-                perfis.add(Perfil.builder().descricao(a).build());
-            });
-            return perfis;
-        };
-
-        Converter<Set<Perfil>, List<GrantedAuthority>> perfisImplConverter = ctx -> ctx.getSource().stream().map(p -> new SimpleGrantedAuthority(p.getDescricao())).collect(Collectors.toList());
+        Converter<List<Perfil>, List<GrantedAuthority>> perfisImplConverter = ctx -> ctx.getSource().stream()
+                .map(p -> new SimpleGrantedAuthority(p.getDescricao())).collect(Collectors.toList());
 
         this.modelMapper.createTypeMap(UsuarioRequest.class, Usuario.class)
                 .addMappings(mapper -> mapper.using(perfisConverter).map(UsuarioRequest::getPerfis, Usuario::setPerfis));
 
         this.modelMapper.createTypeMap(Usuario.class, UserDetailsImpl.class)
                 .addMappings(mapper -> mapper.using(perfisImplConverter).map(Usuario::getPerfis, UserDetailsImpl::setPerfis));
+    }
+
+    public Usuario mapUserDetailsImpl(UserDetailsImpl userDetails) {
+        return this.mapObject(userDetails, Usuario.class);
     }
 
     public UserDetailsImpl mapUserDetailsImpl(Usuario usuario) {

@@ -5,8 +5,8 @@ import lombok.*;
 import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Perfil;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -39,7 +39,10 @@ public class UsuarioResponse {
     @Schema(description = "Data do último acesso", example = "2022-06-04T17:13:47.218729")
     private LocalDateTime ultimoAcesso;
 
-    private Set<Perfil> perfis = new HashSet<>();
+    @Schema(description = "Usuário que realizou o cadastro")
+    private UsuarioResumidoResponse usuario;
 
+    @Schema(description = "Perfis")
+    private List<Perfil> perfis = new ArrayList<>();
 
 }

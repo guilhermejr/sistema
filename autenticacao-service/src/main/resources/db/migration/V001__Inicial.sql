@@ -24,6 +24,7 @@ CREATE TABLE auditoria.usuarios_auditoria (
     criado timestamp NULL,
     atualizado timestamp NULL,
     ultimo_acesso timestamp NULL,
+    usuario_id uuid NULL,
     revisao int4 NOT NULL,
     tipo int2 NULL,
     CONSTRAINT usuarios_auditoria_pkey PRIMARY KEY (id, revisao),
@@ -63,8 +64,10 @@ CREATE TABLE public.usuarios (
     criado timestamp NULL,
     atualizado timestamp NULL,
     ultimo_acesso timestamp NULL,
+    usuario_id uuid NOT NULL,
     CONSTRAINT uk_kfsp0s1tflm1cwlj8idhqsad0 UNIQUE (email),
-    CONSTRAINT usuarios_pkey PRIMARY KEY (id)
+    CONSTRAINT usuarios_pkey PRIMARY KEY (id),
+    CONSTRAINT fkduud97bl1pdfhruhbcfy3x2ti FOREIGN KEY (usuario_id) REFERENCES public.usuarios(id)
 );
 
 CREATE TABLE public.usuarios_perfis (
@@ -82,7 +85,7 @@ INSERT INTO public.perfis VALUES ('92a9dc62-a185-42f0-9b88-16b3c5203d8b', 'ROLE_
 INSERT INTO public.perfis VALUES ('3040541e-912c-449c-99ec-bcdfac857234', 'ROLE_GASTOS');
 INSERT INTO public.perfis VALUES ('279cffe2-30b5-41bd-933b-30160f6dc193', 'ROLE_LIVROS');
 
-INSERT INTO public.usuarios (id, nome, email, senha, ativo, criado, atualizado, ultimo_acesso) VALUES ('70d740b7-e632-4c95-b0a7-d824e7aacb4b', 'Guilherme Jr.',  'falecom@guilhermejr.net', '$2a$10$xEQR2fW67/9nQBM3/9YXLuiObBgNqqjgmlFKowI3V3wCmdtIXZDru', true, '2022-06-19 18:18:57.742', '2022-06-19 18:18:57.741', NULL);
+INSERT INTO public.usuarios (id, nome, email, senha, ativo, criado, atualizado, ultimo_acesso, usuario_id) VALUES ('70d740b7-e632-4c95-b0a7-d824e7aacb4b', 'Guilherme Jr.',  'falecom@guilhermejr.net', '$2a$10$xEQR2fW67/9nQBM3/9YXLuiObBgNqqjgmlFKowI3V3wCmdtIXZDru', true, '2022-06-19 18:18:57.742', '2022-06-19 18:18:57.741', NULL, '70d740b7-e632-4c95-b0a7-d824e7aacb4b');
 
 INSERT INTO public.usuarios_perfis (usuario_id, perfis_id) VALUES('70d740b7-e632-4c95-b0a7-d824e7aacb4b', 'bf46be73-815e-410b-b787-cb48c35f8b1c');
 INSERT INTO public.usuarios_perfis (usuario_id, perfis_id) VALUES('70d740b7-e632-4c95-b0a7-d824e7aacb4b', '73de00bc-6ddf-47f5-b645-5be28295ff8e');

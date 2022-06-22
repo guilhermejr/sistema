@@ -8,7 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,6 +41,6 @@ public class UsuarioRequest {
 
     @NotEmpty
     @Schema(description = "Perfil(s) do usuário", example = "ROLE_ADMIN")
-    private Set<String> perfis;
+    private List<String> perfis;
 
 }
