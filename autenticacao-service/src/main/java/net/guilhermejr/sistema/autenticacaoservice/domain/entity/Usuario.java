@@ -1,6 +1,7 @@
 package net.guilhermejr.sistema.autenticacaoservice.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
@@ -34,6 +35,7 @@ public class Usuario implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String senha;
 

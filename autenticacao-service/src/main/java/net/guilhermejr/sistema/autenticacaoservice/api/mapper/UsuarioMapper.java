@@ -7,11 +7,11 @@ import net.guilhermejr.sistema.autenticacaoservice.config.security.UserDetailsIm
 import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Perfil;
 import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Usuario;
 import org.modelmapper.Converter;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,8 +49,8 @@ public class UsuarioMapper extends ModelMapperConfig {
         return this.mapObject(usuario, UsuarioResponse.class);
     }
 
-    public List<UsuarioResponse> mapList(List<Usuario> usuarios) {
-        return this.mapList(usuarios, UsuarioResponse.class);
+    public Page<UsuarioResponse> mapPage(Page<Usuario> usuario) {
+        return this.mapPage(usuario, UsuarioResponse.class);
     }
 
 }

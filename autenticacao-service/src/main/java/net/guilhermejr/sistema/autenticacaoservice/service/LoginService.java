@@ -8,7 +8,6 @@ import net.guilhermejr.sistema.autenticacaoservice.config.security.UserDetailsIm
 import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Usuario;
 import net.guilhermejr.sistema.autenticacaoservice.domain.repository.UsuarioRepository;
 import net.guilhermejr.sistema.autenticacaoservice.exception.ExceptionDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +32,7 @@ public class LoginService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    // --- Login --------------------------------------------------------------
     public JWTResponde login (LoginRequest loginRequest) {
 
         try {

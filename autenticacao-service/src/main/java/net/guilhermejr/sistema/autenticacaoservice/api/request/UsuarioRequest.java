@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Schema(description = "Request para usuário")
+@Schema(description = "Request para inserir usuário")
 public class UsuarioRequest {
 
     @NotBlank

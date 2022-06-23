@@ -28,12 +28,13 @@ public class LoginController {
         this.loginService = loginService;
     }
 
+    // --- Login --------------------------------------------------------------
     @Operation(summary = "Login do usuário", responses = {
             @ApiResponse(responseCode = "200", description = "OK",content = @Content(mediaType = "application/json", schema = @Schema(implementation = JWTResponde.class))),
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDefaultDTO.class)))
     })
     @PostMapping
-    public ResponseEntity<JWTResponde> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JWTResponde> login(@Valid @RequestBody LoginRequest loginRequest) {
 
         log.info("Iniciando login do usuário");
         JWTResponde jwtResponde = loginService.login(loginRequest);
