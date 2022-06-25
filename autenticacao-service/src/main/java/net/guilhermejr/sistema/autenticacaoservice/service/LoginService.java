@@ -1,6 +1,9 @@
 package net.guilhermejr.sistema.autenticacaoservice.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.guilhermejr.sistema.autenticacaoservice.api.dto.EsqueciMinhaSenhaDTO;
+import net.guilhermejr.sistema.autenticacaoservice.api.request.EsqueciMinhaSenhaRequest;
 import net.guilhermejr.sistema.autenticacaoservice.api.request.LoginRequest;
 import net.guilhermejr.sistema.autenticacaoservice.api.response.JWTResponde;
 import net.guilhermejr.sistema.autenticacaoservice.config.security.JwtProvider;
@@ -8,29 +11,29 @@ import net.guilhermejr.sistema.autenticacaoservice.config.security.UserDetailsIm
 import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Usuario;
 import net.guilhermejr.sistema.autenticacaoservice.domain.repository.UsuarioRepository;
 import net.guilhermejr.sistema.autenticacaoservice.exception.ExceptionDefault;
+import net.guilhermejr.sistema.autenticacaoservice.exception.ExceptionNotFound;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.UUID;
 
 @Log4j2
+@RequiredArgsConstructor
 @Service
 public class LoginService {
 
     private final JwtProvider jwtProvider;
     private final AuthenticationManager authenticationManager;
-
     private final UsuarioRepository usuarioRepository;
-
-    public LoginService(JwtProvider jwtProvider, AuthenticationManager authenticationManager, UsuarioRepository usuarioRepository) {
-        this.jwtProvider = jwtProvider;
-        this.authenticationManager = authenticationManager;
-        this.usuarioRepository = usuarioRepository;
-    }
+    private final KafkaTemplate<String, Serializable> kafkaTemplate;
 
     // --- Login --------------------------------------------------------------
     public JWTResponde login (LoginRequest loginRequest) {
@@ -60,6 +63,28 @@ public class LoginService {
             throw new ExceptionDefault("Combinação de e-mail e senha inválidos.");
 
         }
+
+    }
+
+    // --- EsqueciMinhaSenha --------------------------------------------------
+    public void esqueciMinhaSenha(EsqueciMinhaSenhaRequest esqueciMinhaSenhaRequest) {
+
+        String novaSenha = UUID.randomUUID().toString();
+        String novaSenhaCriptografada = new BCryptPasswordEncoder().encode(novaSenha);
+        String email = esqueciMinhaSenhaRequest.getEmail();
+        Usuario usuario = usuarioRepository.findByEmail(esqueciMinhaSenhaRequest.getEmail()).orElseThrow(() -> {
+            log.error("Usuário: {} - Não encontrado", email);
+            throw new ExceptionNotFound("Usuário: "+ email +" - Não encontrado");
+        });
+        usuario.setSenha(novaSenhaCriptografada);
+        usuarioRepository.save(usuario);
+
+        EsqueciMinhaSenhaDTO esqueciMinhaSenhaDTO = EsqueciMinhaSenhaDTO.builder().nome(usuario.getNome()).email(usuario.getEmail()).senha(novaSenha).build();
+
+        log.info("Nova senha: {}", novaSenha);
+
+        kafkaTemplate.send("esqueci-minha-senha", esqueciMinhaSenhaDTO);
+        log.info("Nova senha enviada para {}", email);
 
     }
 }

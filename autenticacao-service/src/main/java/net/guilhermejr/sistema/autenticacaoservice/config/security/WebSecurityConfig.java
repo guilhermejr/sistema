@@ -1,6 +1,5 @@
 package net.guilhermejr.sistema.autenticacaoservice.config.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] LISTA_BRANCA = {
             "/login",
+            "/esqueci-minha-senha",
             "/actuator/**",
             "/swagger-ui/**",
             "/v3/**"

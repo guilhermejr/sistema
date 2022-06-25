@@ -1,5 +1,6 @@
 package net.guilhermejr.sistema.autenticacaoservice.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.autenticacaoservice.api.mapper.PerfilMapper;
 import net.guilhermejr.sistema.autenticacaoservice.api.response.PerfilResponse;
@@ -10,16 +11,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Log4j2
+@RequiredArgsConstructor
 @Service
 public class PerfilService {
 
     private final PerfilRepository perfilRepository;
     private final PerfilMapper perfilMapper;
-
-    public PerfilService(PerfilRepository perfilRepository, PerfilMapper perfilMapper) {
-        this.perfilRepository = perfilRepository;
-        this.perfilMapper = perfilMapper;
-    }
 
     // --- Retornar -----------------------------------------------------------
     public List<PerfilResponse> retornar() {

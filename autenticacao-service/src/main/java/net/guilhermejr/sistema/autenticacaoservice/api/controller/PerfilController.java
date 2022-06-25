@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.autenticacaoservice.api.response.PerfilResponse;
 import net.guilhermejr.sistema.autenticacaoservice.exception.dto.ErrorDefaultDTO;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Log4j2
+@RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasAnyRole('ADMIN')")
@@ -27,10 +29,6 @@ import java.util.List;
 public class PerfilController {
 
     private final PerfilService perfilService;
-
-    public PerfilController(PerfilService perfilService) {
-        this.perfilService = perfilService;
-    }
 
     // --- Retornar -----------------------------------------------------------
     @Operation(summary = "Retorna perfis", responses = {

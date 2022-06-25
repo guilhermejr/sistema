@@ -1,6 +1,7 @@
 package net.guilhermejr.sistema.autenticacaoservice.exception;
 
 import io.swagger.v3.oas.annotations.Hidden;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.autenticacaoservice.exception.dto.ErrorDefaultDTO;
 import net.guilhermejr.sistema.autenticacaoservice.exception.dto.ErrorRequestDTO;
@@ -19,14 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
+@RequiredArgsConstructor
 @RestControllerAdvice
 public class ErrorHandler {
 
     private final MessageSource messageSource;
-
-    public ErrorHandler(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
 
     @ExceptionHandler(ExceptionDefault.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

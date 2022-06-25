@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.autenticacaoservice.api.request.TrocaSenhaRequest;
 import net.guilhermejr.sistema.autenticacaoservice.api.request.UsuarioAtualizarRequest;
@@ -27,6 +28,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @Log4j2
+@RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @PreAuthorize("hasAnyRole('ADMIN')")
@@ -34,10 +36,6 @@ import java.util.UUID;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-    }
 
     // --- Retornar -----------------------------------------------------------
     @Operation(summary = "Retorna usuários", responses = {
@@ -111,7 +109,7 @@ public class UsuarioController {
 
     }
 
-    // --- alterarStatus ------------------------------------------------------
+    // --- AlterarStatus ------------------------------------------------------
     @Operation(summary = "Muda o status do usuário", responses = {
             @ApiResponse(responseCode = "204", description = "Status modificado"),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDefaultDTO.class)))
@@ -119,7 +117,7 @@ public class UsuarioController {
     @PutMapping(path = "{id}/alterar-status")
     public ResponseEntity<Void> alterarStatus(@Parameter(description = "ID do usuário", example = "6cf41e83-ab70-4598-8eb4-354a49b19e3f") @PathVariable UUID id) {
 
-        this.usuarioService.alterarStatus(id);
+        usuarioService.alterarStatus(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }

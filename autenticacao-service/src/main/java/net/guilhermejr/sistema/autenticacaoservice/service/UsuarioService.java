@@ -1,5 +1,6 @@
 package net.guilhermejr.sistema.autenticacaoservice.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.autenticacaoservice.api.mapper.UsuarioMapper;
 import net.guilhermejr.sistema.autenticacaoservice.api.request.TrocaSenhaRequest;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Log4j2
+@RequiredArgsConstructor
 @Service
 public class UsuarioService {
 
@@ -33,14 +35,6 @@ public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final PerfilRepository perfilRepository;
     private final AuthenticationCurrentUserService authenticationCurrentUserService;
-
-
-    public UsuarioService(UsuarioMapper usuarioMapper, UsuarioRepository usuarioRepository, PerfilRepository perfilRepository, AuthenticationCurrentUserService authenticationCurrentUserService) {
-        this.usuarioMapper = usuarioMapper;
-        this.usuarioRepository = usuarioRepository;
-        this.perfilRepository = perfilRepository;
-        this.authenticationCurrentUserService = authenticationCurrentUserService;
-    }
 
     // --- Inserir ------------------------------------------------------------
     @Transactional
