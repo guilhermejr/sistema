@@ -4,6 +4,7 @@ volumes:
   data:
 
 services:
+  
   postgresql:
     image: postgres
     container_name: postgres-sistema
@@ -11,6 +12,21 @@ services:
     environment:
       - POSTGRES_PASSWORD=Postgres2018!
     ports:
-      - "5432:5432"
+      - 5432:5432
     volumes:
       - "./data:/var/lib/postgresql/data"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
