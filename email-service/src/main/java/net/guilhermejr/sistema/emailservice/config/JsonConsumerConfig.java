@@ -20,7 +20,7 @@ public class JsonConsumerConfig {
     private final KafkaProperties properties;
 
     @Bean
-    public ConsumerFactory<String, Object> jsonConsumerFactory() {
+    public ConsumerFactory jsonConsumerFactory() {
         var configs = new HashMap<String, Object>();
         configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServers());
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -29,8 +29,8 @@ public class JsonConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory jsonContainerFactory(ConsumerFactory<String, Object> jsonConsumerFactory) {
-        var factory = new ConcurrentKafkaListenerContainerFactory<String, Object>();
+    public ConcurrentKafkaListenerContainerFactory jsonContainerFactory(ConsumerFactory jsonConsumerFactory) {
+        var factory = new ConcurrentKafkaListenerContainerFactory();
         factory.setConsumerFactory(jsonConsumerFactory);
         factory.setMessageConverter(new JsonMessageConverter());
         return factory;

@@ -12,6 +12,7 @@ import net.guilhermejr.sistema.autenticacaoservice.domain.entity.Usuario;
 import net.guilhermejr.sistema.autenticacaoservice.domain.repository.UsuarioRepository;
 import net.guilhermejr.sistema.autenticacaoservice.exception.ExceptionDefault;
 import net.guilhermejr.sistema.autenticacaoservice.exception.ExceptionNotFound;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +35,9 @@ public class LoginService {
     private final AuthenticationManager authenticationManager;
     private final UsuarioRepository usuarioRepository;
     private final KafkaTemplate<String, Serializable> kafkaTemplate;
+
+    @Value("${kafka.topico.esqueci-minha-senha}")
+    private String topicoEsqueciMinhaSenha;
 
     // --- Login --------------------------------------------------------------
     public JWTResponde login (LoginRequest loginRequest) {
@@ -81,9 +85,7 @@ public class LoginService {
 
         EsqueciMinhaSenhaDTO esqueciMinhaSenhaDTO = EsqueciMinhaSenhaDTO.builder().nome(usuario.getNome()).email(usuario.getEmail()).senha(novaSenha).build();
 
-        log.info("Nova senha: {}", novaSenha);
-
-        kafkaTemplate.send("esqueci-minha-senha", esqueciMinhaSenhaDTO);
+        kafkaTemplate.send(topicoEsqueciMinhaSenha, esqueciMinhaSenhaDTO);
         log.info("Nova senha enviada para {}", email);
 
     }
