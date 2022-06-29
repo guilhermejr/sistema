@@ -108,7 +108,8 @@ public class AcompanhamentoService {
         // --- Atualiza totais ---
         total.setEnergiaGerada(total.getEnergiaGerada().subtract(acompanhamento.getEnergiaGerada()));
         total.setEnergiaInjetada(total.getEnergiaInjetada() - acompanhamento.getEnergiaInjetada());
-        total.setEnergiaConsumida(total.getEnergiaConsumida() - acompanhamento.getEnergiaConsumida());
+        total.setEnergiaConsumidaConcessionaria(total.getEnergiaConsumidaConcessionaria() - acompanhamento.getEnergiaConsumidaConcessionaria());
+        total.setEnergiaConsumidaTotal(total.getEnergiaConsumidaTotal().subtract(acompanhamento.getEnergiaConsumidaTotal()));
         total.setSaldoMes(total.getSaldoMes() - acompanhamento.getSaldoMes());
         total.setTusd(total.getTusd().subtract(acompanhamento.getTusd()));
         total.setTe(total.getTe().subtract(acompanhamento.getTe()));
@@ -151,8 +152,12 @@ public class AcompanhamentoService {
         Long dias = ChronoUnit.DAYS.between(acompanhamento.getInicio(), acompanhamento.getFim());
         acompanhamento.setDias(dias.intValue());
 
+        // --- Calcula consumo total ---
+        BigDecimal consumoTotal = BigDecimal.valueOf(acompanhamento.getEnergiaConsumidaConcessionaria()).add(acompanhamento.getEnergiaGerada().subtract(BigDecimal.valueOf(acompanhamento.getEnergiaInjetada())));
+        acompanhamento.setEnergiaConsumidaTotal(consumoTotal);
+
         // --- Calcula saldoMes ---
-        Integer saldoMes = acompanhamento.getEnergiaInjetada() - acompanhamento.getEnergiaConsumida();
+        Integer saldoMes = acompanhamento.getEnergiaInjetada() - acompanhamento.getEnergiaConsumidaConcessionaria();
         acompanhamento.setSaldoMes(saldoMes);
 
         // --- Calcula valorTotal ---
@@ -179,7 +184,8 @@ public class AcompanhamentoService {
         // --- Atualiza totais ---
         total.setEnergiaGerada(total.getEnergiaGerada().add(acompanhamento.getEnergiaGerada()));
         total.setEnergiaInjetada(total.getEnergiaInjetada() + acompanhamento.getEnergiaInjetada());
-        total.setEnergiaConsumida(total.getEnergiaConsumida() + acompanhamento.getEnergiaConsumida());
+        total.setEnergiaConsumidaConcessionaria(total.getEnergiaConsumidaConcessionaria() + acompanhamento.getEnergiaConsumidaConcessionaria());
+        total.setEnergiaConsumidaTotal(total.getEnergiaConsumidaTotal().add(acompanhamento.getEnergiaConsumidaTotal()));
         total.setSaldoMes(total.getSaldoMes() + acompanhamento.getSaldoMes());
         total.setTusd(total.getTusd().add(acompanhamento.getTusd()));
         total.setTe(total.getTe().add(acompanhamento.getTe()));

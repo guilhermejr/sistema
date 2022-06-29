@@ -28,14 +28,17 @@ public class AcompanhamentoResponse {
     @Schema(description = "Quantos dias se passaram entre início e fim", example = "32")
     private Integer dias;
 
-    @Schema(description = "Energia gerada", example = "653.5")
+    @Schema(description = "Energia gerada", example = "590.2")
     private BigDecimal energiaGerada;
 
     @Schema(description = "Energia injetada", example = "485")
     private Integer energiaInjetada;
 
-    @Schema(description = "Energia consumida", example = "339")
-    private Integer energiaConsumida;
+    @Schema(description = "Energia consumida da concessionária", example = "339")
+    private Integer energiaConsumidaConcessionaria;
+
+    @Schema(description = "Energia consumida Total, que é calculado diminuindo a energia gerada pela energia injetada e somando com a energia consumida", example = "444.2")
+    private BigDecimal energiaConsumidaTotal;
 
     @Schema(description = "Saldo de energia, que é calculado diminuindo a energia injetada pela energia consumida", example = "146")
     private Integer saldoMes;

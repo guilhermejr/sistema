@@ -45,7 +45,10 @@ public class Acompanhamento implements Serializable {
     private Integer energiaInjetada;
 
     @Column(nullable = false)
-    private Integer energiaConsumida;
+    private Integer energiaConsumidaConcessionaria;
+
+    @Column(nullable = false)
+    private BigDecimal energiaConsumidaTotal;
 
     @Column(nullable = false)
     private Integer saldoMes;

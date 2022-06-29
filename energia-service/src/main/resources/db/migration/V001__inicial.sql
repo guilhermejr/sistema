@@ -11,7 +11,8 @@ CREATE TABLE auditoria.totais_auditoria (
     tipo smallint,
     energia_gerada numeric(19,2),
     energia_injetada integer,
-    energia_consumida integer,
+    energia_consumida_concessionaria integer,
+    energia_consumida_total numeric(19,2),
     saldo_mes integer,
     tusd numeric(19,2),
     te numeric(19,2),
@@ -36,7 +37,8 @@ CREATE TABLE auditoria.acompanhamentos_auditoria (
     dias integer,
     energia_gerada numeric(19,2),
     energia_injetada integer,
-    energia_consumida integer,
+    energia_consumida_concessionaria integer,
+    energia_consumida_total numeric(19,2),
     saldo_mes integer,
     tusd numeric(19,2),
     te numeric(19,2),
@@ -60,7 +62,8 @@ CREATE TABLE public.acompanhamentos (
     dias integer NOT NULL,
     energia_gerada numeric(19,2),
     energia_injetada integer NOT NULL,
-    energia_consumida integer NOT NULL,
+    energia_consumida_concessionaria integer NOT NULL,
+    energia_consumida_total numeric(19,2) NOT NULL,
     saldo_mes integer NOT NULL,
     tusd numeric(19,2) NOT NULL,
     te numeric(19,2) NOT NULL,
@@ -77,7 +80,8 @@ CREATE TABLE public.totais (
     id bigserial NOT NULL,
     energia_gerada numeric(19,2) NOT NULL,
     energia_injetada integer NOT NULL,
-    energia_consumida integer NOT NULL,
+    energia_consumida_concessionaria integer NOT NULL,
+    energia_consumida_total numeric(19,2) NOT NULL,
     saldo_mes integer NOT NULL,
     tusd numeric(19,2) NOT NULL,
     te numeric(19,2) NOT NULL,
@@ -89,7 +93,7 @@ CREATE TABLE public.totais (
     CONSTRAINT totais_pkey PRIMARY KEY (id)
 );
 
-INSERT INTO public.totais (energia_gerada, energia_injetada, energia_consumida, saldo_mes, tusd, te, bandeira, iluminacao_publica, desconto, valor_total, atualizado) VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, CURRENT_TIMESTAMP);
+INSERT INTO public.totais (energia_gerada, energia_injetada, energia_consumida_concessionaria, energia_consumida_total, saldo_mes, tusd, te, bandeira, iluminacao_publica, desconto, valor_total, atualizado) VALUES (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, CURRENT_TIMESTAMP);
 
 CREATE SEQUENCE public.hibernate_sequence
     INCREMENT BY 1

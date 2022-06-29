@@ -41,8 +41,8 @@ public class AcompanhamentoRequest {
 
     @NotNull
     @Positive
-    @Schema(description = "Energia consumida", example = "339")
-    private Integer energiaConsumida;
+    @Schema(description = "Energia consumida da concessionária", example = "339")
+    private Integer energiaConsumidaConcessionaria;
 
     @NotBlank
     @ValorMonetario
