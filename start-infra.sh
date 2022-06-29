@@ -52,6 +52,13 @@ nohup java -jar gateway-server/target/gateway-server-0.0.1.jar > .gateway-server
 ok
 echo $! > .gateway-server.pid 
 
+sleep 5
+
+echo -ne "Iniciando autenticacao-service... "
+nohup java -jar autenticacao-service/target/autenticacao-service-0.0.1.jar > .autenticacao-service.log 2>&1 &
+ok
+echo $! > .autenticacao-service.pid 
+
 echo -ne "Iniciando monitoramento... "
 nohup java -jar monitoramento/target/monitoramento-0.0.1.jar > .monitoramento.log 2>&1 &
 ok

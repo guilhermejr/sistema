@@ -18,6 +18,14 @@ else
     falhou
 fi
 
+echo -ne "Parando autenticacao-service... "
+kill -9 $(cat .autenticacao-service.pid) 1>/dev/null 2>/dev/null
+if [ $? -eq 0 ]; then
+    ok
+else
+    falhou
+fi
+
 echo -ne "Parando gateway-server... "
 kill -9 $(cat .gateway-server.pid) 1>/dev/null 2>/dev/null
 if [ $? -eq 0 ]; then
