@@ -18,6 +18,10 @@ spring:
           uri: lb://autenticacao-service/
           predicates:
             - Path=/autenticacao-service/**
+        - id: supermercado-service
+          uri: lb://supermercado-service/
+          predicates:
+            - Path=/supermercado-service/**
 
 management:
   endpoint:
