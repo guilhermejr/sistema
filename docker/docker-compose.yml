@@ -20,6 +20,9 @@ services:
     image: guilhermejr/vault
     container_name: vault-sistema
     restart: always
+    environment:
+      - VAULT_ADDR=http://localhost:8200
+      - VAULT_UNSEAL_TOKEN=z4eTN0jBOerVmRqP0ralartRhRsBOevnnIYm/DNvOyU=
     ports:
       - 8200:8200
     volumes:
