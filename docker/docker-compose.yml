@@ -16,6 +16,15 @@ services:
     volumes:
       - "./data:/var/lib/postgresql/data"
 
+  vault:
+    image: guilhermejr/vault
+    container_name: vault-sistema
+    restart: always
+    ports:
+      - 8200:8200
+    volumes:
+      - "./vault:/root/vault/data"
+      
   # zookeeper:
   #   image: wurstmeister/zookeeper
   #   container_name: zookeeper

@@ -1,25 +1,36 @@
 
 spring:
+  config:
+    import: vault://
+  cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      uri: http://localhost:8200
+      token: ${VAULT_TOKEN:hvs.VSlxeCypMevB7HLAYZ1hB73L}
+
   boot:
     admin:
       client:
-        url: http://localhost:9000
-        username: admin
-        password: 8eJeakZoGeZwp351k2
+        url: http://${monitoramentoHost}:9000
+        username: ${monitoramentoUser}
+        password: ${monitoramentoPass}
         instance:
           metadata:
             user:
-              name: actuator
-              password: 3xBv6lN3lPWX8jjiSa
+              name: ${actuatorUser}
+              password: ${actuatorPass}
 
 sistema:
   eureka:
-    login: eureka
-    senha: mMnsilmomkq0bFiktR
+    host: ${eurekaServerHost}
+    login: ${eurekaServerUser}
+    senha: ${eurekaServerPass}
 
 eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
     service-url:
-      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@localhost:8761/eureka'
+      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@${sistema.eureka.host}:8761/eureka'

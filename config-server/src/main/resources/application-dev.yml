@@ -1,6 +1,16 @@
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
+  config:
+    import: vault://
   cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      uri: http://localhost:8200
+      token: ${VAULT_TOKEN:hvs.VSlxeCypMevB7HLAYZ1hB73L}
     config:
       server:
         git:
@@ -10,26 +20,27 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:9000
-        username: admin
-        password: 8eJeakZoGeZwp351k2
+        url: http://${monitoramentoHost}:9000
+        username: ${monitoramentoUser}
+        password: ${monitoramentoPass}
         instance:
           metadata:
             user:
-                name: actuator
-                password: gkhIh63sSja7VKBhAD
+              name: ${actuatorUser}
+              password: ${actuatorPass}
 
 sistema:
   eureka:
-    login: eureka
-    senha: mMnsilmomkq0bFiktR
+    host: ${eurekaServerHost}
+    login: ${eurekaServerUser}
+    senha: ${eurekaServerPass}
   config:
-    login: config
-    senha: EAIRdFHSb6wzz1GWjX
+    login: ${configServerUser}
+    senha: ${configServerPass}
 
 eureka:
   client:
     service-url:
-      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@localhost:8761/eureka'
+      defaultZone: 'http://${sistema.eureka.login}:${sistema.eureka.senha}@${sistema.eureka.host}:8761/eureka'
   instance:
-    hostname: localhost
+    hostname: ${sistema.eureka.host}

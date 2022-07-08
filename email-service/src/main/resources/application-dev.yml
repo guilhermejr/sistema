@@ -1,17 +1,21 @@
 spring:
   config:
-    import: 'configserver:'
+    import: 'vault://, configserver:'
   cloud:
+    vault:
+      host: localhost
+      port: 8200
+      scheme: http
+      uri: http://localhost:8200
+      token: ${VAULT_TOKEN:hvs.VSlxeCypMevB7HLAYZ1hB73L}
     config:
       discovery:
         serviceId: config-server
-      username: config
-      password: EAIRdFHSb6wzz1GWjX
-  mail:
-    password: yeuowskefwbgqjot
+      username: ${CONFIG_USER:config}
+      password: ${CONFIG_PASS:o5qByEjgPOwh3yXOqf}
   boot:
     admin:
       client:
-        url: http://localhost:9000
-        username: admin
-        password: 8eJeakZoGeZwp351k2
+        url: http://${monitoramentoHost}:9000
+        username: ${monitoramentoUser}
+        password: ${monitoramentoPass}
