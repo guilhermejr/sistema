@@ -35,6 +35,8 @@ else
     fi
 fi
 
+sleep 20
+
 echo -ne "Iniciando eureka-server... "
 nohup java -jar eureka-server/target/eureka-server-0.0.1.jar > .eureka-server.log 2>&1 &
 ok
