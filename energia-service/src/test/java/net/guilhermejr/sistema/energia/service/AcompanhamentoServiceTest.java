@@ -113,6 +113,7 @@ public class AcompanhamentoServiceTest {
 
         Assertions.assertNotNull(acompanhamentoResponse);
         Assertions.assertEquals(32, acompanhamentoResponse.getDias());
+        Assertions.assertEquals(new BigDecimal("444.2"), acompanhamentoResponse.getEnergiaConsumidaTotal());
         Assertions.assertEquals(146, acompanhamentoResponse.getSaldoMes());
         Assertions.assertEquals(new BigDecimal("57.17"), acompanhamentoResponse.getValorTotal());
 
@@ -152,7 +153,8 @@ public class AcompanhamentoServiceTest {
         AcompanhamentoResponse acompanhamentoResponse = acompanhamentoService.atualizar(idExistente, DTOFactory.acompanhamentoRequest1);
 
         Assertions.assertNotNull(acompanhamentoResponse);
-        Assertions.assertEquals(28, acompanhamentoResponse.getDias());
+        Assertions.assertEquals(27, acompanhamentoResponse.getDias());
+        Assertions.assertEquals(new BigDecimal("438.4"), acompanhamentoResponse.getEnergiaConsumidaTotal());
         Assertions.assertEquals(240, acompanhamentoResponse.getSaldoMes());
         Assertions.assertEquals(new BigDecimal("54.89"), acompanhamentoResponse.getValorTotal());
 

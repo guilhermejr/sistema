@@ -28,7 +28,8 @@ public class TotalServiceIntegrationTest {
         Assertions.assertEquals(1L, total.getId());
         Assertions.assertEquals(new BigDecimal("0.00"), total.getEnergiaGerada());
         Assertions.assertEquals(0, total.getEnergiaInjetada());
-        Assertions.assertEquals(0, total.getEnergiaConsumida());
+        Assertions.assertEquals(0, total.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(new BigDecimal("0.00"), total.getEnergiaConsumidaTotal());
         Assertions.assertEquals(0, total.getSaldoMes());
         Assertions.assertEquals(new BigDecimal("0.00"), total.getTusd());
         Assertions.assertEquals(new BigDecimal("0.00"), total.getTe());

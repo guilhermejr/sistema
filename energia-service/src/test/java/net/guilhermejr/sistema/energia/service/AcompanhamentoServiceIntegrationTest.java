@@ -44,9 +44,9 @@ public class AcompanhamentoServiceIntegrationTest {
         List<AcompanhamentoResponse> acompanhamentoResponses = acompanhamentoService.retornar();
 
         Assertions.assertEquals(3L, acompanhamentoRepository.count());
-        Assertions.assertEquals(new BigDecimal("653.5"), acompanhamentoResponses.get(0).getEnergiaGerada());
-        Assertions.assertEquals(new BigDecimal("772.5"), acompanhamentoResponses.get(1).getEnergiaGerada());
-        Assertions.assertEquals(new BigDecimal("713.6"), acompanhamentoResponses.get(2).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("590.2"), acompanhamentoResponses.get(0).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("659.3"), acompanhamentoResponses.get(1).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("678.4"), acompanhamentoResponses.get(2).getEnergiaGerada());
 
     }
 
@@ -63,7 +63,8 @@ public class AcompanhamentoServiceIntegrationTest {
         Assertions.assertEquals(EntityFactory.acompanhamento1.getDias(), acompanhamentoRetorno.getDias());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaGerada(), acompanhamentoRetorno.getEnergiaGerada());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaInjetada(), acompanhamentoRetorno.getEnergiaInjetada());
-        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumida(), acompanhamentoRetorno.getEnergiaConsumida());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaConcessionaria(), acompanhamentoRetorno.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaTotal(), acompanhamentoRetorno.getEnergiaConsumidaTotal());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getSaldoMes(), acompanhamentoRetorno.getSaldoMes());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTusd(), acompanhamentoRetorno.getTusd());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTe(), acompanhamentoRetorno.getTe());
@@ -97,7 +98,8 @@ public class AcompanhamentoServiceIntegrationTest {
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getDias(), acompanhamento.getDias());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaGerada(), acompanhamento.getEnergiaGerada());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaInjetada(), acompanhamento.getEnergiaInjetada());
-        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumida(), acompanhamento.getEnergiaConsumida());
+        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumidaConcessionaria(), acompanhamento.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumidaTotal(), acompanhamento.getEnergiaConsumidaTotal());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getSaldoMes(), acompanhamento.getSaldoMes());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getTusd(), acompanhamento.getTusd());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getTe(), acompanhamento.getTe());
@@ -123,7 +125,8 @@ public class AcompanhamentoServiceIntegrationTest {
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getDias(), acompanhamentoAtualizado.getDias());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaGerada(), acompanhamentoAtualizado.getEnergiaGerada());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaInjetada(), acompanhamentoAtualizado.getEnergiaInjetada());
-        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumida(), acompanhamentoAtualizado.getEnergiaConsumida());
+        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumidaConcessionaria(), acompanhamentoAtualizado.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getEnergiaConsumidaTotal(), acompanhamentoAtualizado.getEnergiaConsumidaTotal());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getSaldoMes(), acompanhamentoAtualizado.getSaldoMes());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getTusd(), acompanhamentoAtualizado.getTusd());
         Assertions.assertEquals(DTOFactory.acompanhamentoResponseAtualizar.getTe(), acompanhamentoAtualizado.getTe());

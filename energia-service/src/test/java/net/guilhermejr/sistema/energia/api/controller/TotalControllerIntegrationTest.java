@@ -1,5 +1,6 @@
 package net.guilhermejr.sistema.energia.api.controller;
 
+import net.guilhermejr.sistema.energia.util.TokenFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,12 +30,14 @@ public class TotalControllerIntegrationTest {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/total")
                         .accept(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer "+ TokenFactory.TOKEN_VALIDO)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value("1"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.energiaGerada").value("0.0"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.energiaInjetada").value("0"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.energiaConsumida").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.energiaConsumidaConcessionaria").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.energiaConsumidaTotal").value("0.0"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.saldoMes").value("0"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.tusd").value("0.0"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.bandeira").value("0.0"))

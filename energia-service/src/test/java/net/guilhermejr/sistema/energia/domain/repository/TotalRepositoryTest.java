@@ -30,7 +30,8 @@ public class TotalRepositoryTest {
         Assertions.assertTrue(total.isPresent());
         Assertions.assertEquals(new BigDecimal("0.00"), total.get().getEnergiaGerada());
         Assertions.assertEquals(0, total.get().getEnergiaInjetada());
-        Assertions.assertEquals(0, total.get().getEnergiaConsumida());
+        Assertions.assertEquals(0, total.get().getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(new BigDecimal("0.00"), total.get().getEnergiaConsumidaTotal());
         Assertions.assertEquals(0, total.get().getSaldoMes());
         Assertions.assertEquals(new BigDecimal("0.00"), total.get().getTusd());
         Assertions.assertEquals(new BigDecimal("0.00"), total.get().getTe());
@@ -50,7 +51,8 @@ public class TotalRepositoryTest {
         Assertions.assertEquals(1L, total.getId());
         Assertions.assertEquals(EntityFactory.total.getEnergiaGerada(), total.getEnergiaGerada());
         Assertions.assertEquals(EntityFactory.total.getEnergiaInjetada(), total.getEnergiaInjetada());
-        Assertions.assertEquals(EntityFactory.total.getEnergiaConsumida(), total.getEnergiaConsumida());
+        Assertions.assertEquals(EntityFactory.total.getEnergiaConsumidaConcessionaria(), total.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(EntityFactory.total.getEnergiaConsumidaTotal(), total.getEnergiaConsumidaTotal());
         Assertions.assertEquals(EntityFactory.total.getSaldoMes(), total.getSaldoMes());
         Assertions.assertEquals(EntityFactory.total.getTusd(), total.getTusd());
         Assertions.assertEquals(EntityFactory.total.getTe(), total.getTe());

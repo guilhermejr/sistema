@@ -19,3 +19,8 @@ spring:
         url: http://${monitoramentoHost}:9000
         username: ${monitoramentoUser}
         password: ${monitoramentoPass}
+        instance:
+          metadata:
+            user:
+              name: ${actuatorUser}
+              password: ${actuatorPass}

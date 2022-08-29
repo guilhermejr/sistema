@@ -37,9 +37,9 @@ public class AcompanhamentoRepositoryTest {
         List<Acompanhamento> acompanhamentoList = acompanhamentoRepository.findAllByOrderByInicioAsc();
 
         Assertions.assertEquals(3L, acompanhamentoRepository.count());
-        Assertions.assertEquals(new BigDecimal("653.5"), acompanhamentoList.get(0).getEnergiaGerada());
-        Assertions.assertEquals(new BigDecimal("772.5"), acompanhamentoList.get(1).getEnergiaGerada());
-        Assertions.assertEquals(new BigDecimal("713.6"), acompanhamentoList.get(2).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("590.2"), acompanhamentoList.get(0).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("659.3"), acompanhamentoList.get(1).getEnergiaGerada());
+        Assertions.assertEquals(new BigDecimal("678.4"), acompanhamentoList.get(2).getEnergiaGerada());
 
     }
 
@@ -60,7 +60,8 @@ public class AcompanhamentoRepositoryTest {
         Assertions.assertEquals(EntityFactory.acompanhamento1.getDias(), acompanhamento.getDias());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaGerada(), acompanhamento.getEnergiaGerada());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaInjetada(), acompanhamento.getEnergiaInjetada());
-        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumida(), acompanhamento.getEnergiaConsumida());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaConcessionaria(), acompanhamento.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaTotal(), acompanhamento.getEnergiaConsumidaTotal());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getSaldoMes(), acompanhamento.getSaldoMes());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTusd(), acompanhamento.getTusd());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTe(), acompanhamento.getTe());
@@ -95,7 +96,8 @@ public class AcompanhamentoRepositoryTest {
         Assertions.assertEquals(EntityFactory.acompanhamento1.getDias(), acompanhamento.getDias());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaGerada(), acompanhamento.getEnergiaGerada());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaInjetada(), acompanhamento.getEnergiaInjetada());
-        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumida(), acompanhamento.getEnergiaConsumida());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaConcessionaria(), acompanhamento.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(EntityFactory.acompanhamento1.getEnergiaConsumidaTotal(), acompanhamento.getEnergiaConsumidaTotal());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getSaldoMes(), acompanhamento.getSaldoMes());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTusd(), acompanhamento.getTusd());
         Assertions.assertEquals(EntityFactory.acompanhamento1.getTe(), acompanhamento.getTe());
@@ -124,7 +126,8 @@ public class AcompanhamentoRepositoryTest {
         Assertions.assertEquals(EntityFactory.acompanhamento2.getDias(), acompanhamentoAtualizado.getDias());
         Assertions.assertEquals(EntityFactory.acompanhamento2.getEnergiaGerada(), acompanhamentoAtualizado.getEnergiaGerada());
         Assertions.assertEquals(EntityFactory.acompanhamento2.getEnergiaInjetada(), acompanhamentoAtualizado.getEnergiaInjetada());
-        Assertions.assertEquals(EntityFactory.acompanhamento2.getEnergiaConsumida(), acompanhamentoAtualizado.getEnergiaConsumida());
+        Assertions.assertEquals(EntityFactory.acompanhamento2.getEnergiaConsumidaConcessionaria(), acompanhamentoAtualizado.getEnergiaConsumidaConcessionaria());
+        Assertions.assertEquals(EntityFactory.acompanhamento2.getEnergiaConsumidaTotal(), acompanhamentoAtualizado.getEnergiaConsumidaTotal());
         Assertions.assertEquals(EntityFactory.acompanhamento2.getSaldoMes(), acompanhamentoAtualizado.getSaldoMes());
         Assertions.assertEquals(EntityFactory.acompanhamento2.getTusd(), acompanhamentoAtualizado.getTusd());
         Assertions.assertEquals(EntityFactory.acompanhamento2.getTe(), acompanhamentoAtualizado.getTe());

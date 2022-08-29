@@ -24,12 +24,6 @@ public class WebSecurityConfig {
         this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
-    private static final String[] LISTA_BRANCA = {
-            "/actuator/**",
-            "/swagger-ui/**",
-            "/v3/**"
-    };
-
     @Bean
     public AuthenticationJwtFilter authenticationJwtFilter() {
         return new AuthenticationJwtFilter();
@@ -43,7 +37,6 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(LISTA_BRANCA).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();
