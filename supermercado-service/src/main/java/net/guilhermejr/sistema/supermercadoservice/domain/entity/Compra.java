@@ -49,6 +49,9 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private BigDecimal total;
 
+    @Column(nullable = false)
+    private UUID usuario;
+
     @Column(updatable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime criado;

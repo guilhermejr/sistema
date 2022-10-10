@@ -12,7 +12,6 @@ import net.guilhermejr.sistema.supermercadoservice.api.response.CompraListagemRe
 import net.guilhermejr.sistema.supermercadoservice.api.response.CompraResponse;
 import net.guilhermejr.sistema.supermercadoservice.api.response.NFEResponse;
 import net.guilhermejr.sistema.supermercadoservice.api.response.SupermercadoListagemResponse;
-import net.guilhermejr.sistema.supermercadoservice.domain.entity.Compra;
 import net.guilhermejr.sistema.supermercadoservice.exception.dto.ErrorDefaultDTO;
 import net.guilhermejr.sistema.supermercadoservice.exception.dto.ErrorRequestDTO;
 import net.guilhermejr.sistema.supermercadoservice.service.CompraService;

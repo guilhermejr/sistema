@@ -8,6 +8,7 @@ import net.guilhermejr.sistema.supermercadoservice.api.response.CompraListagemRe
 import net.guilhermejr.sistema.supermercadoservice.api.response.CompraResponse;
 import net.guilhermejr.sistema.supermercadoservice.api.response.NFEResponse;
 import net.guilhermejr.sistema.supermercadoservice.client.NFEBAClient;
+import net.guilhermejr.sistema.supermercadoservice.config.security.AuthenticationCurrentUserService;
 import net.guilhermejr.sistema.supermercadoservice.domain.entity.*;
 import net.guilhermejr.sistema.supermercadoservice.domain.repository.*;
 import net.guilhermejr.sistema.supermercadoservice.exception.ExceptionDefault;
@@ -34,6 +35,7 @@ public class CompraService {
     private final ItemRepository itemRepository;
     private final ConverteStringUtil converteStringUtil;
     private final CompraMapper compraMapper;
+    private final AuthenticationCurrentUserService authenticationCurrentUserService;
 
     // --- Inserir ------------------------------------------------------------
     public NFEResponse inserir(URLRequest urlRequest) {
@@ -64,6 +66,8 @@ public class CompraService {
             log.info("Supermercado cadastrado {}", nfeResponse.getNome());
         }
 
+        UUID usuario = authenticationCurrentUserService.getCurrentUser().getId();
+
         // --- Compra ---
         Compra compra = Compra.builder()
                 .supermercado(supermercado)
@@ -72,6 +76,7 @@ public class CompraService {
                 .total(converteStringUtil.toBigDecimal(nfeResponse.getTotal()))
                 .url(nfeResponse.getUrl())
                 .criado(LocalDateTime.now(ZoneId.of("UTC")))
+                .usuario(usuario)
                 .build();
         compraRepository.save(compra);
         log.info("Compra cadastrada {} - {}", nfeResponse.getData(), nfeResponse.getChaveDeAcesso());
