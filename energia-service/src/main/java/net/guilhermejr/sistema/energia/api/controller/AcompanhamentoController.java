@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.energia.api.request.AcompanhamentoRequest;
 import net.guilhermejr.sistema.energia.api.response.AcompanhamentoResponse;
@@ -22,6 +23,7 @@ import java.util.List;
 
 @Tag(name = "Acompanhamentos")
 @Log4j2
+@AllArgsConstructor
 @RestController
 @CrossOrigin(originPatterns = "*", maxAge = 3600)
 @PreAuthorize("hasAnyRole('ENERGIA')")
@@ -29,10 +31,6 @@ import java.util.List;
 public class AcompanhamentoController {
 
     private final AcompanhamentoService acompanhamentoService;
-
-    public AcompanhamentoController(AcompanhamentoService acompanhamentoService) {
-        this.acompanhamentoService = acompanhamentoService;
-    }
 
     // --- Retornar -----------------------------------------------------------
     @Operation(summary = "Retorna acompanhamentos", responses = {

@@ -1,9 +1,11 @@
 package net.guilhermejr.sistema.energia.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.energia.api.mapper.AcompanhamentoMapper;
 import net.guilhermejr.sistema.energia.api.request.AcompanhamentoRequest;
 import net.guilhermejr.sistema.energia.api.response.AcompanhamentoResponse;
+import net.guilhermejr.sistema.energia.config.security.AuthenticationCurrentUserService;
 import net.guilhermejr.sistema.energia.domain.entity.Acompanhamento;
 import net.guilhermejr.sistema.energia.domain.entity.Total;
 import net.guilhermejr.sistema.energia.domain.repository.AcompanhamentoRepository;
@@ -19,22 +21,17 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Log4j2
 @Service
+@AllArgsConstructor
 public class AcompanhamentoService {
 
     private final AcompanhamentoRepository acompanhamentoRepository;
-
     private final TotalRepository totalRepository;
-
     private final AcompanhamentoMapper acompanhamentoMapper;
-
-    public AcompanhamentoService(AcompanhamentoRepository acompanhamentoRepository, TotalRepository totalRepository, AcompanhamentoMapper acompanhamentoMapper) {
-        this.acompanhamentoRepository = acompanhamentoRepository;
-        this.totalRepository = totalRepository;
-        this.acompanhamentoMapper = acompanhamentoMapper;
-    }
+    private final AuthenticationCurrentUserService authenticationCurrentUserService;
 
     // --- Retornar -----------------------------------------------------------
     public List<AcompanhamentoResponse> retornar() {
@@ -134,8 +131,12 @@ public class AcompanhamentoService {
     // --- Salvar -------------------------------------------------------------
     private AcompanhamentoResponse salvar(AcompanhamentoRequest acompanhamentoRequest, Long id) {
 
-        // --- Converte AcompanhamentoIN em Acompanhamento ---
+        // --- Converte acompanhamentoRequest em Acompanhamento ---
         Acompanhamento acompanhamento = acompanhamentoMapper.mapObject(acompanhamentoRequest);
+
+        // --- Adiciona usuário que está fazendo a operação ---
+        UUID usuairo = authenticationCurrentUserService.getCurrentUser().getId();
+        acompanhamento.setUsuario(usuairo);
 
         // --- Verifica se inicio é menor que fim ---
         if (acompanhamento.getInicio().isAfter(acompanhamento.getFim())) {

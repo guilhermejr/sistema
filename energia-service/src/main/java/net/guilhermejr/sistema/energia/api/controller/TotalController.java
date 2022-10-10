@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.energia.api.response.TotalResponse;
 import net.guilhermejr.sistema.energia.exception.dto.ErrorDefaultDTO;
@@ -18,16 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Total")
 @Log4j2
+@AllArgsConstructor
 @RestController
 @CrossOrigin(originPatterns = "*", maxAge = 3600)
 @RequestMapping("/total")
 public class TotalController {
 
     private final TotalService totalService;
-
-    public TotalController(TotalService totalService) {
-        this.totalService = totalService;
-    }
 
     // --- Retornar -----------------------------------------------------------
     @Operation(summary = "Retorna totais", responses = {

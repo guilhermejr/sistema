@@ -1,5 +1,6 @@
 package net.guilhermejr.sistema.energia.service;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.guilhermejr.sistema.energia.api.response.TotalResponse;
 import net.guilhermejr.sistema.energia.domain.entity.Total;
@@ -11,17 +12,12 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Log4j2
+@AllArgsConstructor
 @Service
 public class TotalService {
 
     private TotalRepository totalRepository;
-
     private TotalMapper totalMapper;
-
-    public TotalService(TotalRepository totalRepository, TotalMapper totalMapper) {
-        this.totalRepository = totalRepository;
-        this.totalMapper = totalMapper;
-    }
 
     // --- Retornar -----------------------------------------------------------
     public TotalResponse retornar() {
